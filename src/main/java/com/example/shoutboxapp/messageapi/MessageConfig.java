@@ -18,7 +18,7 @@ public class MessageConfig implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        messageRepository.save(new Message(0L, "Author", "Hello there", LocalDateTime.now()));
-        messageRepository.save(new Message(1L, "Somebody", "Send something", LocalDateTime.now()));
+        messageRepository.save(new Message("Author", "Hello there"));
+        messageRepository.save(new Message("Somebody", "Send something"));
     }
 }

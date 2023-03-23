@@ -2,7 +2,9 @@ package com.example.shoutboxapp.messageapi;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
@@ -10,6 +12,8 @@ import java.time.temporal.ChronoUnit;
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
+@Getter
+@Setter
 public class Message {
     @Id
     @SequenceGenerator(
@@ -27,6 +31,11 @@ public class Message {
     @Column(columnDefinition = "TEXT", nullable = false)
     private String message;
     private LocalDateTime publishedTime = LocalDateTime.now();
+
+    public Message(String author, String message) {
+        this.author = author;
+        this.message = message;
+    }
 
     /**
      * Calculate and return formatted string with information when message was sent. For example "35 seconds ago".
