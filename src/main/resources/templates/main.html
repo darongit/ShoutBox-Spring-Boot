@@ -1,10 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
+<style>
+html {
+    background-color: #6833FF;
+    color: white;
+}
+div {
+    border-radius: 20px 75px;
+    background-color: #23096D;
+    box-shadow: 0px 0px 20px 20px #23096D;
+    width: 75%;
+    display: flex;
+    justify-content: center;
+    margin: auto;
+    padding: 10px;
+}
+.head-div {
+
+}
+.messages-div {
+    border-radius: 10px;
+    display: block;
+}
+.message-table {
+    border-collapse: separate;
+    border-spacing: 5em;
+}
+input {
+    border-radius: 10px;
+}
+    </style>
 <head>
     <meta charset="UTF-8">
     <title>ShoutBox</title>
 </head>
 <body>
-
+<div class="head-div">
+    <div class="choice-field" style="width: 50%;">
+        <form action="/">
+            <label for="author">Author:</label>
+            <input type="text" id="author" name="author"><br><br>
+            <label for="message">Message:</label>
+            <input type="text" id="message" name="message"><br><br>
+            <input type="submit" value="Send!">
+        </form>
+    </div>
+    <form action="/apimap">
+        <input type="submit" value="Go to API map">
+    </form>
+</div>
+<br>
+<br>
+<br>
+<div class="messages-div">
+        <table class="message-table">
+            <tr th:each="message : ${messages}">
+                <td><span th:text="${message.getAuthor()}"></span><em> ~<span th:text="${message.getTimeSincePublished()}"></span></em></td>
+                <td th:text="${message.getMessage()}"></td>
+            </tr>
+        </table>
+</div>
 </body>
 </html>
