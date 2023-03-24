@@ -62,12 +62,21 @@ public class MessageService {
     }
 
     public List<Message> getAllMessages() {
-        return messageRepository.findAll();
+        return messageRepository.findAll().stream()
+                .sorted((message1, message2) -> message2.getPublishedTime().compareTo(message1.getPublishedTime()))
+                .toList();
     }
 
     public void addMessage(Message message) {
+        if (message.getAuthor().isEmpty() || message.getMessage().isEmpty()) {
+            return;
+        }
         // simple anti-spam filter
         int secondsLimit = 5;
+        if (message.getMessage().equals(messageRepository.findAll().get(messageRepository.findAll().size()-1).getMessage())
+        && message.getAuthor().equals(messageRepository.findAll().get(messageRepository.findAll().size()-1).getAuthor())) {
+            return;
+        }
         List<Message> similarMessages = new ArrayList<>();
         messageRepository.findAll().stream()
                 .filter(existsMessage -> existsMessage.getAuthor().equals(message.getAuthor()))

@@ -2,8 +2,9 @@
 <html lang="en">
 <style>
 html {
-    background-color: #6833FF;
+    background-color: #02044D;
     color: white;
+    font-family: Arial, Helvetica, sans-serif;
 }
 div {
     border-radius: 20px 75px;
@@ -25,11 +26,22 @@ div {
 .message-table {
     border-collapse: separate;
     border-spacing: 5em;
+    margin-top: 25px;
+    margin-left: 25px;
 }
 input {
     border-radius: 10px;
 }
-    </style>
+.table-row {
+
+}
+</style>
+<script>
+    function fun() {
+        document.getElementById("myform").reset();
+        window.location.replace("/");
+    }
+</script>
 <head>
     <meta charset="UTF-8">
     <title>ShoutBox</title>
@@ -37,12 +49,13 @@ input {
 <body>
 <div class="head-div">
     <div class="choice-field" style="width: 50%;">
-        <form action="/">
+        <form id="myform" action="/">
             <label for="author">Author:</label>
             <input type="text" id="author" name="author"><br><br>
             <label for="message">Message:</label>
             <input type="text" id="message" name="message"><br><br>
             <input type="submit" value="Send!">
+            <input type="button" value="Reset and refresh" onclick="fun()">
         </form>
     </div>
     <form action="/apimap">
@@ -54,8 +67,8 @@ input {
 <br>
 <div class="messages-div">
         <table class="message-table">
-            <tr th:each="message : ${messages}">
-                <td><span th:text="${message.getAuthor()}"></span><em> ~<span th:text="${message.getTimeSincePublished()}"></span></em></td>
+            <tr th:each="message : ${messages}" class="table-row">
+                <td><span th:text="${message.getAuthor()}"></span><em> ~<span style="font-size: small;" th:text="${message.getTimeSincePublished()}"></span></em></td>
                 <td th:text="${message.getMessage()}"></td>
             </tr>
         </table>

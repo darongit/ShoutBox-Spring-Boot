@@ -45,31 +45,49 @@ public class Message {
         LocalDateTime now = LocalDateTime.now();
         Long diff = ChronoUnit.YEARS.between(publishedTime, now);
         if (diff >= 1) {
+            if (diff == 1) {
+                return String.format("%s year ago", diff);
+            }
             return String.format("%s years ago", diff);
         }
 
         diff = ChronoUnit.MONTHS.between(publishedTime, now);
         if (diff >= 1) {
+            if (diff == 1) {
+                return String.format("%s month ago", diff);
+            }
             return String.format("%s months ago", diff);
         }
 
         diff = ChronoUnit.DAYS.between(publishedTime, now);
         if (diff >= 1) {
+            if (diff == 1) {
+                return String.format("%s day ago", diff);
+            }
             return String.format("%s days ago", diff);
         }
 
         diff = ChronoUnit.HOURS.between(publishedTime, now);
         if (diff >= 1) {
+            if (diff == 1) {
+                return String.format("%s hour ago", diff);
+            }
             return String.format("%s hours ago", diff);
         }
 
         diff = ChronoUnit.MINUTES.between(publishedTime, now);
         if (diff >= 1) {
+            if (diff == 1) {
+                return String.format("%s minute ago", diff);
+            }
             return String.format("%s minutes ago", diff);
         }
 
         // if nothing don't fit time have to be less than minute
         diff = ChronoUnit.SECONDS.between(publishedTime, now);
+        if (diff == 1) {
+            return String.format("%s second ago", diff);
+        }
         return String.format("%s seconds ago", diff);
     }
 }
